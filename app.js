@@ -21,12 +21,6 @@ const questions = [
         message: "Name:"
     },
     {
-        type: "list",
-        name: "role",
-        message: "Role:",
-        choices: ["Engineer", "Intern", "Main", "Manager"]
-    },
-    {
         type: "input",
         name: "id",
         message: "ID Number:"
@@ -37,12 +31,20 @@ const questions = [
         message: "Email:"
     },
     {
+        type: "list",
+        name: "role",
+        message: "Role:",
+        choices: ["Engineer", "Intern", "Main", "Manager"]
+    },
+    {
         type: "confirm",
         name: "done",
         message: "Done adding?"
     }]
 
-inquirer.prompt(questions).then(response => {new Employee(response)}) // create objects
+inquirer.prompt(questions).then(response => {
+    new Employee(response)
+})
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
