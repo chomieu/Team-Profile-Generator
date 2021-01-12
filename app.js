@@ -29,21 +29,29 @@ const questions = [
         type: "input",
         name: "id",
         message: "ID Number:"
+    },
+    {
+        type: "confirm",
+        name: "done",
+        message: "Done adding?"
     }]
 
-inquirer.prompt(questions)
+inquirer.prompt(questions).then() // create objects
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-
+const employees = []
+render(employees)
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
-
+fs.writeFile("./output/team.html", teamInfo, (err) => {
+    err ? console.error(err) : console.log("success")
+})
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
