@@ -1,16 +1,13 @@
 // Define libraries and file paths
-const Manager = require("./lib/Manager");
+const inquirer = require("inquirer");
+const fs = require("fs");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const inquirer = require("inquirer");
+const Manager = require("./lib/Manager");
+const render = require("./lib/htmlRenderer");
 const path = require("path");
-const fs = require("fs");
-
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-
-const render = require("./lib/htmlRenderer");
-const Employee = require("./lib/Employee");
 
 // Stores team members added
 const team = [];
