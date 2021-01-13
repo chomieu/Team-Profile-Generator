@@ -11,64 +11,99 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
+const team = [];
+
+function buildTeam() {
+    inquirer.prompt({
+        type: "confirm",
+        name: "add",
+        message: "Add new team member?"
+    }).then(({ add }) => {
+        switch (add) {
+            case true:
+                addMember()
+            case false:
+                return
+        }
+    })
+}
+
+function addMember() {
+    const questions = [
+        {
+            type: "input",
+            name: "name",
+            message: "Name:"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "ID Number:"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Email:"
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "Role:",
+            choices: ["Engineer", "Intern", "Manager"]
+        },
+        {
+            type: "input",
+            name: "special",
+            message: specialQuestion
+        }]
+
+    inquirer.prompt(questions)
+        .then(response => {
+            const newMember = new Employee(response.name, response.id, response.email, response.special)
+            team.push(newMember)
+            buildTeam()
+        })
+
+}
+
+const specialQuestion = function (response) {
+    switch (response.role) {
+        case "Engineer":
+            return "Github:"
+        case "Intern":
+            return "School:"
+        case "Manager":
+            return "Office Number:"
+    }
+}
+
+// render(team).then(teamInfo => {
+//     fs.writeFile(outputPath, teamInfo, (err) => {
+//         err ? console.error(err) : console.log("success")
+//     })
+// })
+
+buildTeam()
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-const questions = [
-    {
-        type: "input",
-        name: "name",
-        message: "Name:"
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "ID Number:"
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "Email:"
-    },
-    {
-        type: "list",
-        name: "role",
-        message: "Role:",
-        choices: ["Engineer", "Intern", "Main", "Manager"]
-    },
-    {
-        type: "confirm",
-        name: "done",
-        message: "Done adding?"
-    }]
-
-inquirer.prompt(questions).then(response => {
-    new Employee(response)
-})
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-const employees = []
-render(employees)
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
-fs.writeFile("./output/team.html", teamInfo, (err) => {
-    err ? console.error(err) : console.log("success")
-})
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
-
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
-
