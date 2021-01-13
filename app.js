@@ -56,12 +56,14 @@ function buildTeam() {
                 addMember();
                 break;
             case false:
-                fs.writeFile(outputPath, render(team), (err) => {
-                    err ? console.error(err) : console.log("success")
-                })
-        }
-    })
-}
+                if (!fs.existsSync(OUTPUT_DIR)) {
+                    fs.mkdir("output", writeHTML())
+                } else {
+                    writeHTML()
+                }
+            }
+        })
+    }
 
 function addMember() {
     inquirer.prompt(questions)
@@ -80,6 +82,12 @@ function addMember() {
             }
             buildTeam()
         })
+}
+
+function writeHTML() {
+    fs.writeFile(outputPath, render(team), (err) => {
+        err ? console.error(err) : console.log("success")
+    })
 }
 
 buildTeam()
