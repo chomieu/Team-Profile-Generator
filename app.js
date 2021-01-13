@@ -57,7 +57,9 @@ function buildTeam() {
                 break;
             case false:
                 if (!fs.existsSync(OUTPUT_DIR)) {
-                    fs.mkdir("output", writeHTML())
+                    fs.mkdir("output", () => {
+                        writeHTML()
+                    })
                 } else {
                     writeHTML()
                 }
