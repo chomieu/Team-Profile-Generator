@@ -1,23 +1,4 @@
-body {
-    background-color: #665e4327;
-}
-
-img {
-    margin: 0 auto;
-    display: flex;
-    align-self: center;
-    height: 200px;
-    width: 200px;
-    object-fit: contain;
-}
-
-.employee-card {
-    margin: 20px;
-    width: 300px;
-    box-shadow: 10px 10px 5px darkgray;
-    border-color: #665e437a;
-}
-
+/* Adds a nice pattern to the heading and changes text-color to white */
 .team-heading {
     background-color: #6d695c;
     background-image:
@@ -27,6 +8,29 @@ img {
     linear-gradient(120deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
     background-size: 70px 120px;
     color: white;
+}
+
+/* Makes the image fits nicely on each card */
+img {
+    margin: 0 auto;
+    display: flex;
+    align-self: center;
+    height: 200px;
+    width: 200px;
+    object-fit: contain;
+}
+
+/* Sets the width, adds margin, shadow, and border-color to each card */
+.employee-card {
+    margin: 20px;
+    width: 300px;
+    box-shadow: 10px 10px 5px darkgray;
+    border-color: #665e437a;
+}
+
+/* Changes the background color of body, card-header, and card-body */
+body {
+    background-color: #665e4327;
 }
 
 .card-header {
