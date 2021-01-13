@@ -53,10 +53,12 @@ function buildTeam() {
     }).then(({ add }) => {
         switch (add) {
             case true:
-                addMember()
+                addMember();
+                break;
             case false:
-                console.log(team)
-                return
+                fs.writeFile(outputPath, render(team), (err) => {
+                    err ? console.error(err) : console.log("success")
+                })
         }
     })
 }
@@ -79,12 +81,6 @@ function addMember() {
             buildTeam()
         })
 }
-
-// render(team).then(teamInfo => {
-//     fs.writeFile(outputPath, teamInfo, (err) => {
-//         err ? console.error(err) : console.log("success")
-//     })
-// })
 
 buildTeam()
 
