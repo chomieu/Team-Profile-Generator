@@ -12,6 +12,38 @@ const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
 const team = [];
+const questions = [
+    {
+        type: "input",
+        name: "name",
+        message: "Name:"
+    }, {
+        type: "input",
+        name: "id",
+        message: "ID Number:"
+    }, {
+        type: "input",
+        name: "email",
+        message: "Email:"
+    }, {
+        type: "list",
+        name: "role",
+        message: "Role:",
+        choices: ["Engineer", "Intern", "Manager"]
+    }, {
+        type: "input",
+        name: "special",
+        message: function (response) {
+            switch (response.role) {
+                case "Engineer":
+                    return "Github:"
+                case "Intern":
+                    return "School:"
+                case "Manager":
+                    return "Office Number:"
+            }
+        }
+    }]
 
 function buildTeam() {
     inquirer.prompt({
@@ -23,58 +55,29 @@ function buildTeam() {
             case true:
                 addMember()
             case false:
+                console.log(team)
                 return
         }
     })
 }
 
 function addMember() {
-    const questions = [
-        {
-            type: "input",
-            name: "name",
-            message: "Name:"
-        },
-        {
-            type: "input",
-            name: "id",
-            message: "ID Number:"
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "Email:"
-        },
-        {
-            type: "list",
-            name: "role",
-            message: "Role:",
-            choices: ["Engineer", "Intern", "Manager"]
-        },
-        {
-            type: "input",
-            name: "special",
-            message: specialQuestion
-        }]
-
     inquirer.prompt(questions)
         .then(response => {
-            const newMember = new Employee(response.name, response.id, response.email, response.special)
-            team.push(newMember)
+            const parameters = [response.name, response.id, response.email, response.special]
+            switch (response.role) {
+                case "Engineer":
+                    team.push(new Engineer(...parameters));
+                    break;
+                case "Intern":
+                    team.push(new Intern(...parameters));
+                    break;
+                case "Manager":
+                    team.push(new Manager(...parameters));
+                    break;
+            }
             buildTeam()
         })
-
-}
-
-const specialQuestion = function (response) {
-    switch (response.role) {
-        case "Engineer":
-            return "Github:"
-        case "Intern":
-            return "School:"
-        case "Manager":
-            return "Office Number:"
-    }
 }
 
 // render(team).then(teamInfo => {
