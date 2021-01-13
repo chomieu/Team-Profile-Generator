@@ -18,8 +18,8 @@ git clone git@github.com:chomieu/Team-Profile-Generator.git
 ```
 
 ## Usage
-[Walkthrough Video](https://drive.google.com/file/d/1cr6vxcIDR7EPusXFjN1sXw3Cbk5iBkNp/view)</br>
-![Walkthrough GIF](./README_walkthrough.gif)
+[Walkthrough Video](https://drive.google.com/file/d/14rnjXosHUzUtfstmy6XPt8gZtEL8Zzo5/view)</br>
+![Walkthrough GIF](./walkthrough.gif)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
